@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>La Industria · Menú</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --page:#F7F6F2; --ng:#0B1D3A; --r:#2E6FF2; --o:#8FD4FF;
+  --g1:#FFFFFF; --g2:#EEF1F6; --g3:#E4E8EF; --g4:#D3D9E3; --mu:#6b7691; --dg:#ef4444;
+  --bd-soft:rgba(11,29,58,.1);
+  --rad-lg:22px; --rad-md:14px; --rad-sm:10px;
+  --shadow-sm:0 1px 3px rgba(11,29,58,.06);
+  --shadow-md:0 6px 20px rgba(11,29,58,.18);
+  --shadow-lg:0 30px 70px rgba(11,29,58,.28);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:linear-gradient(180deg,#e7e4dd,#f2f0eb);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;}
+a{color:var(--r);} a:hover{color:#194FC2;}
+h1,h2,h3,.bebas{font-family:'Bebas Neue',sans-serif;letter-spacing:1.5px;}
+.hide{display:none!important;}
+button:focus{outline:none;}
+button:focus-visible{outline:2px solid var(--r);outline-offset:2px;}
+::-webkit-scrollbar{width:8px;height:8px;}
+::-webkit-scrollbar-thumb{background:var(--g3);border-radius:8px;}
+
+.app-shell{width:100%;max-width:460px;margin:32px auto;background:var(--page);height:844px;max-height:calc(100vh - 64px);border-radius:28px;box-shadow:var(--shadow-lg);overflow:hidden;position:relative;}
+.shell-scroll{height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+@media (max-width:460px){
+  .app-shell{margin:0;height:100vh;max-height:100vh;border-radius:0;}
+}
+
+/* BANNER + MARCA */
+.banner{height:168px;background:linear-gradient(135deg,var(--ng),#16305c 60%,var(--ng));position:relative;overflow:hidden;}
+.banner::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(143,212,255,.06) 0 2px,transparent 2px 46px);}
+.banner-tag{position:absolute;top:16px;right:20px;font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:4px;color:rgba(143,212,255,.55);}
+.brand-row{display:flex;align-items:flex-end;gap:16px;padding:0 22px;margin-top:-28px;position:relative;}
+.logo-badge{width:80px;height:80px;border-radius:50%;background:var(--page);border:3px solid var(--page);box-shadow:var(--shadow-md);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--ng);flex-shrink:0;overflow:hidden;}
+.logo-badge img{width:100%;height:100%;object-fit:cover;}
+.brand-name{padding-bottom:2px;font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;color:var(--ng);line-height:1.15;}
+.brand-name span{color:var(--r);}
+.brand-sub{font-size:10px;color:var(--mu);letter-spacing:3px;margin-top:5px;font-weight:600;}
+
+/* NAV DE CATEGORÍAS */
+.cat-nav{display:flex;gap:22px;overflow-x:auto;padding:26px 22px 14px;position:sticky;top:0;background:var(--page);z-index:20;}
+.cat-tab{flex-shrink:0;cursor:pointer;font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1px;color:#9aa3ba;padding-bottom:8px;white-space:nowrap;}
+.cat-tab:hover,.cat-tab.on{color:var(--ng);}
+.cat-tab-underline{height:3px;border-radius:3px;margin-top:4px;background:transparent;}
+.cat-tab.on .cat-tab-underline{background:var(--r);}
+
+/* GRID DE PRODUCTOS */
+.menu-main{padding:6px 22px 20px;}
+.cat-title{font-family:'Bebas Neue',sans-serif;font-size:21px;letter-spacing:2px;color:var(--ng);margin:22px 0 13px;}
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;}
+.prod-card{background:var(--g1);border:1px solid var(--bd-soft);border-radius:var(--rad-lg);overflow:hidden;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;position:relative;}
+.prod-img{width:100%;height:118px;position:relative;background:repeating-linear-gradient(45deg,var(--g3),var(--g3) 10px,var(--g2) 10px,var(--g2) 20px);display:flex;align-items:center;justify-content:center;font:11px ui-monospace,Menlo,monospace;color:#9aa3ba;overflow:hidden;}
+.prod-img img{width:100%;height:100%;object-fit:cover;}
+.prod-badge{position:absolute;top:9px;left:9px;background:rgba(11,29,58,.78);color:#fff;font-size:10px;font-weight:700;padding:4px 9px;border-radius:20px;}
+.prod-tag{position:absolute;top:9px;right:0;background:var(--r);color:#fff;font-size:10px;font-weight:700;padding:5px 12px 5px 14px;border-radius:20px 0 0 20px;}
+.prod-body{padding:13px 14px 14px;display:flex;flex-direction:column;flex:1;}
+.prod-nm{font-weight:700;font-size:14px;color:var(--ng);margin-bottom:3px;}
+.prod-desc{font-size:11.5px;color:var(--mu);line-height:1.5;flex:1;margin-bottom:12px;}
+.prod-foot{display:flex;align-items:center;justify-content:space-between;}
+.prod-price{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--r);}
+.btn-agregar{background:var(--r);color:#fff;border:none;border-radius:20px;padding:8px 15px;font-size:11.5px;font-weight:700;cursor:pointer;box-shadow:0 3px 10px rgba(46,111,242,.28);}
+.btn-agregar:hover{background:#194FC2;}
+.qty-ctl{display:flex;align-items:center;gap:8px;background:var(--g2);border-radius:20px;padding:4px 5px;}
+.qty-ctl button{width:25px;height:25px;border-radius:50%;border:none;font-size:15px;cursor:pointer;}
+.qty-ctl button.minus{background:#fff;color:var(--ng);}
+.qty-ctl button.plus{background:var(--ng);color:#fff;}
+.qty-ctl span{font-weight:700;font-size:12.5px;min-width:12px;text-align:center;color:var(--ng);}
+
+/* CARRITO FLOTANTE */
+.cart-fab{position:absolute;left:20px;right:20px;bottom:20px;background:var(--ng);color:#fff;border-radius:16px;padding:15px 18px;display:none;align-items:center;justify-content:space-between;box-shadow:0 8px 24px rgba(11,29,58,.35);cursor:pointer;z-index:50;}
+.cart-fab.show{display:flex;}
+.cart-fab .cf-l{font-size:13px;font-weight:700;display:flex;align-items:center;gap:9px;}
+.cart-fab .cf-badge{background:var(--r);border-radius:50%;width:23px;height:23px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;}
+.cart-fab .cf-r{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--o);}
+
+/* HOJAS / OVERLAY */
+.moverlay{position:fixed;inset:0;display:flex;align-items:flex-end;justify-content:center;background:rgba(11,29,58,.55);z-index:100;opacity:0;pointer-events:none;transition:opacity .25s ease;}
+.moverlay.on{opacity:1;pointer-events:auto;}
+.msheet{background:var(--page);border-radius:22px 22px 0 0;padding:12px 20px 26px;width:100%;max-width:460px;max-height:88%;overflow-y:auto;box-shadow:0 -8px 30px rgba(11,29,58,.3);}
+.msheet-handle{width:36px;height:4px;background:rgba(11,29,58,.15);border-radius:4px;margin:6px auto 16px;}
+.msheet-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.msheet-head h3{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--ng);letter-spacing:1px;}
+.msheet-close{cursor:pointer;color:var(--mu);font-size:12px;font-weight:700;flex-shrink:0;}
+.cart-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--bd-soft);gap:10px;}
+.cart-row .cr-nm{font-weight:700;font-size:13px;color:var(--ng);}
+.cart-row .cr-pr{font-size:11.5px;color:var(--mu);margin-top:2px;}
+.cart-total-row{display:flex;justify-content:space-between;align-items:center;padding:18px 0;font-weight:700;font-size:17px;color:var(--ng);}
+
+/* FORMULARIO CHECKOUT */
+.fld{margin-bottom:14px;text-align:left;}
+.fld label{display:block;font-size:10.5px;font-weight:700;letter-spacing:1px;color:var(--mu);text-transform:uppercase;margin-bottom:6px;}
+.fld input,.fld select,.fld textarea{width:100%;background:var(--g2);border:1px solid var(--bd-soft);border-radius:var(--rad-sm);padding:12px 14px;font-size:14px;color:var(--ng);outline:none;font-family:inherit;}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--r);}
+.canal-opts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px;}
+.canal-opt{border:1px solid var(--bd-soft);background:var(--g1);border-radius:var(--rad-md);padding:14px 6px;text-align:center;cursor:pointer;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.5px;color:var(--mu);line-height:1.3;}
+.canal-opt.on{border-color:var(--r);background:rgba(46,111,242,.07);color:var(--r);}
+.msg{font-size:12px;min-height:16px;margin:6px 0 10px;color:var(--dg);}
+
+.gps-row{display:flex;align-items:center;gap:10px;margin:-6px 0 14px;flex-wrap:wrap;}
+.gps-btn{background:var(--g2);color:var(--ng);border:1px solid var(--bd-soft);border-radius:20px;padding:8px 14px;font-size:11.5px;font-weight:700;cursor:pointer;flex-shrink:0;}
+.gps-btn:hover{background:var(--g3);}
+.gps-btn:disabled{opacity:.6;cursor:default;}
+.gps-status{font-size:11px;color:var(--mu);}
+.gps-status.ok{color:#16a34a;font-weight:600;}
+.gps-status.err{color:var(--dg);}
+
+.btn{display:block;width:100%;border:none;border-radius:var(--rad-sm);padding:15px 18px;font-size:14px;font-weight:700;cursor:pointer;}
+.btn-r{background:var(--r);color:#fff;box-shadow:0 3px 10px rgba(46,111,242,.3);}
+.btn-r:hover{background:#194FC2;}
+.btn-g{background:var(--g3);color:var(--ng);}
+.btn-g:hover{background:var(--g4);}
+
+/* CONFIRMACIÓN */
+.confirm-body{text-align:center;padding:18px 4px 0;}
+.confirm-check{width:64px;height:64px;border-radius:50%;background:var(--ng);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;}
+.confirm-body h3{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--ng);letter-spacing:1px;margin-bottom:8px;}
+.confirm-body p{color:var(--mu);font-size:13px;line-height:1.6;margin-bottom:22px;}
+.empty-menu{text-align:center;color:var(--mu);padding:60px 20px;font-size:13px;}
+</style>
+</head>
+<body>
+
+<div class="app-shell">
+
+  <div class="shell-scroll">
+    <header>
+      <div class="banner" id="banner"><div class="banner-tag">LA INDUSTRIA · MENÚ</div></div>
+      <div class="brand-row">
+        <div class="logo-badge" id="logo-badge">LI</div>
+        <div class="brand-name">LA <span>INDUSTRIA</span><div class="brand-sub">FAST FOOD</div></div>
+      </div>
+    </header>
+
+    <nav class="cat-nav" id="cat-nav"></nav>
+
+    <main class="menu-main" id="menu-main">
+      <div class="empty-menu">Cargando menú…</div>
+    </main>
+  </div>
+
+  <div class="cart-fab" id="cart-fab" onclick="abrirCarrito()">
+    <div class="cf-l"><span class="cf-badge" id="cf-badge">0</span> Ver pedido</div>
+    <div class="cf-r" id="cf-total">$0</div>
+  </div>
+
+</div>
+
+<!-- CARRITO -->
+<div class="moverlay" id="overlay-carrito">
+  <div class="msheet">
+    <div class="msheet-handle"></div>
+    <div class="msheet-head"><h3>TU PEDIDO</h3><span class="msheet-close" onclick="cerrarOverlay('overlay-carrito')">CERRAR ✕</span></div>
+    <div id="cart-list"></div>
+    <div class="cart-total-row"><span>Total</span><span id="cart-total-txt">$0</span></div>
+    <button class="btn btn-r" onclick="irACheckout()">CONTINUAR →</button>
+  </div>
+</div>
+
+<!-- CHECKOUT -->
+<div class="moverlay" id="overlay-checkout">
+  <div class="msheet">
+    <div class="msheet-handle"></div>
+    <div class="msheet-head"><h3>¿CÓMO QUIERES TU PEDIDO?</h3><span class="msheet-close" onclick="cerrarOverlay('overlay-checkout')">CERRAR ✕</span></div>
+    <div class="canal-opts">
+      <div class="canal-opt" id="canal-domicilio" onclick="elegirCanal('domicilio')">🛵 Domicilio</div>
+      <div class="canal-opt" id="canal-recoge" onclick="elegirCanal('recoge')">🏃 Para llevar</div>
+      <div class="canal-opt" id="canal-sitio" onclick="elegirCanal('sitio')">🍽️ Comer aquí</div>
+    </div>
+    <div class="fld hide" id="ck-mesa-wrap"><label>Mesa</label><select id="ck-mesa"></select></div>
+    <div class="fld"><label>Nombre</label><input id="ck-nombre"></div>
+    <div class="fld" id="ck-telefono-wrap"><label>Teléfono / WhatsApp</label><input id="ck-telefono" type="tel"></div>
+    <div class="fld hide" id="ck-zona-wrap"><label>Zona</label><select id="ck-zona"></select></div>
+    <div class="fld hide" id="ck-direccion-wrap">
+      <label>Dirección de entrega</label>
+      <textarea id="ck-direccion" rows="2" placeholder="Barrio, calle, casa/apto, punto de referencia"></textarea>
+      <div class="gps-row">
+        <button type="button" class="gps-btn" id="gps-btn" onclick="capturarUbicacion()">📍 Usar mi ubicación actual</button>
+        <span class="gps-status" id="gps-status"></span>
+      </div>
+    </div>
+    <div class="fld"><label>Método de pago</label>
+      <select id="ck-metodo">
+        <option>Efectivo</option><option>Nequi/Daviplata</option><option>Transferencia</option><option>Tarjeta</option>
+      </select>
+    </div>
+    <div id="ck-msg" class="msg"></div>
+    <button class="btn btn-r" onclick="confirmarPedido()">CONFIRMAR PEDIDO →</button>
+  </div>
+</div>
+
+<!-- CONFIRMACIÓN -->
+<div class="moverlay" id="overlay-confirmacion">
+  <div class="msheet">
+    <div class="confirm-body">
+      <div class="confirm-check">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12.5L9.5 18L20 6" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3>¡PEDIDO RECIBIDO!</h3>
+      <p id="confirm-detalle">Ya lo estamos preparando. Te contactaremos al número que dejaste para confirmar la entrega.</p>
+      <a id="btn-whatsapp" class="btn btn-r" href="#" target="_blank" rel="noopener" style="text-decoration:none;margin-bottom:10px;">📲 CONFIRMAR POR WHATSAPP</a>
+      <button class="btn btn-g" onclick="cerrarOverlay('overlay-confirmacion')">LISTO</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-app.js";
+import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-auth.js";
+import {
+  getFirestore, collection, doc, addDoc, updateDoc, onSnapshot, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore.js";
+
+// Mismo proyecto y mismo negocio que el POS: los productos y los pedidos
+// creados aquí llegan directo a Cocina/Caja/Informes sin ningún paso manual.
+const firebaseConfig = {
+  apiKey:"AIzaSyBFlxMwmINvg1NQhVy4NB_xCemYV8lqfig",authDomain:"la-industria-crm.firebaseapp.com",
+  projectId:"la-industria-crm",storageBucket:"la-industria-crm.firebasestorage.app",
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const NEG = "la-industria";
+const WHATSAPP_NUM = "573011291717";
+const negDoc = (sub) => collection(db, "negocios", NEG, sub);
+const negD = (sub, id) => doc(db, "negocios", NEG, sub, id);
+
+function money(n){ return '$'+Math.round(n||0).toLocaleString('es-CO'); }
+
+let MENU = [];
+let MESAS = [];
+let ZONAS = [];
+let ubicacionGPS = null; // { lat, lng } — opcional, para ruteo óptimo de domicilios
+
+window.capturarUbicacion = function(){
+  const btn = document.getElementById('gps-btn');
+  const status = document.getElementById('gps-status');
+  status.className = 'gps-status';
+  if(!navigator.geolocation){
+    status.className = 'gps-status err';
+    status.textContent = 'Tu navegador no soporta ubicación GPS.';
+    return;
+  }
+  btn.disabled = true;
+  status.textContent = 'Obteniendo ubicación...';
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      ubicacionGPS = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+      btn.disabled = false;
+      status.className = 'gps-status ok';
+      status.textContent = '✓ Ubicación capturada — ayuda a que tu pedido llegue más rápido.';
+    },
+    (err) => {
+      ubicacionGPS = null;
+      btn.disabled = false;
+      status.className = 'gps-status err';
+      status.textContent = err.code === err.PERMISSION_DENIED
+        ? 'No diste permiso de ubicación. No hay problema, solo usaremos la dirección escrita.'
+        : 'No se pudo obtener tu ubicación. Usaremos la dirección escrita.';
+    },
+    { enableHighAccuracy: true, timeout: 10000 }
+  );
+}
+let carrito = {}; // producto_id -> {producto, cantidad}
+let categoriaActiva = 'Todas';
+let canalElegido = null;
+
+function mostrarErrorCarga(msg){
+  document.getElementById('menu-main').innerHTML = `<div class="empty-menu">⚠️ ${msg}</div>`;
+}
+
+signInAnonymously(auth).catch(e => {
+  console.error('Error de autenticación', e);
+  mostrarErrorCarga('No se pudo conectar. Si estás abriendo este archivo con doble clic, súbelo a un hosting (http/https) — los navegadores bloquean Firebase en archivos locales.');
+});
+
+onSnapshot(doc(db,'negocios',NEG), snap => {
+  const d = snap.data();
+  if(!d) return;
+  if(d.banner_url) document.getElementById('banner').style.backgroundImage = `url('${d.banner_url}')`;
+  if(d.logo_url) document.getElementById('logo-badge').innerHTML = `<img src="${d.logo_url}">`;
+}, e => console.error('Error leyendo datos del negocio', e));
+
+onSnapshot(negDoc('menu'), snap => {
+  MENU = snap.docs.map(d => ({ id:d.id, ...d.data() })).filter(p => p.activo !== false);
+  renderCatNav();
+  renderMenu();
+}, e => {
+  console.error('Error leyendo el menú', e);
+  if(e.code === 'permission-denied'){
+    mostrarErrorCarga('No tenemos permiso para cargar el menú todavía. Falta publicar las reglas de Firestore actualizadas en Firebase Console (Firestore Database → Reglas).');
+  } else {
+    mostrarErrorCarga('No se pudo cargar el menú. Intenta recargar la página en unos minutos.');
+  }
+});
+
+onSnapshot(negDoc('mesas'), snap => {
+  MESAS = snap.docs.map(d => ({ id:d.id, ...d.data() }));
+  if(canalElegido==='sitio') renderMesaSelect();
+}, e => console.error('Error leyendo mesas', e));
+
+function renderMesaSelect(){
+  const sel = document.getElementById('ck-mesa');
+  const libres = MESAS.filter(m => m.estado !== 'ocupada').sort((a,b) => (a.numero||0)-(b.numero||0));
+  sel.innerHTML = libres.length
+    ? libres.map(m => `<option value="${m.id}">Mesa ${m.numero}</option>`).join('')
+    : `<option value="">No hay mesas disponibles</option>`;
+}
+
+onSnapshot(negDoc('zonas'), snap => {
+  ZONAS = snap.docs.map(d => ({ id:d.id, ...d.data() })).sort((a,b) => a.nombre.localeCompare(b.nombre));
+  renderZonaSelect();
+}, e => console.error('Error leyendo zonas', e));
+
+function renderZonaSelect(){
+  const sel = document.getElementById('ck-zona');
+  sel.innerHTML = ZONAS.length
+    ? ZONAS.map(z => `<option value="${z.nombre}">${z.nombre}</option>`).join('')
+    : `<option value="">Sin zonas configuradas</option>`;
+}
+
+function renderCatNav(){
+  const cats = ['Todas', ...new Set(MENU.map(p=>p.categoria||'General'))];
+  document.getElementById('cat-nav').innerHTML = cats.map(c =>
+    `<div class="cat-tab ${c===categoriaActiva?'on':''}" data-cat="${c}">${c}<div class="cat-tab-underline"></div></div>`
+  ).join('');
+  document.querySelectorAll('.cat-tab').forEach(el => el.onclick = () => {
+    categoriaActiva = el.dataset.cat; renderCatNav(); renderMenu();
+    document.querySelector(`.cat-tab[data-cat="${CSS.escape(categoriaActiva)}"]`)?.scrollIntoView({inline:'center',behavior:'smooth'});
+  });
+}
+
+function renderMenu(){
+  const main = document.getElementById('menu-main');
+  if(MENU.length===0){ main.innerHTML = '<div class="empty-menu">Aún no hay productos publicados. Vuelve pronto 🍔</div>'; return; }
+  const porCategoria = {};
+  MENU.forEach(p => { (porCategoria[p.categoria||'General'] ||= []).push(p); });
+  const categorias = categoriaActiva==='Todas' ? Object.keys(porCategoria) : [categoriaActiva];
+  main.innerHTML = categorias.filter(c=>porCategoria[c]).map(cat => `
+    <div class="cat-title">${cat}</div>
+    <div class="prod-grid">
+      ${porCategoria[cat].map(p => `
+        <div class="prod-card">
+          <div class="prod-img">${p.imagen ? `<img src="${p.imagen}" loading="lazy">` : 'SIN FOTO'}</div>
+          ${p.porciones ? `<div class="prod-badge">👥 ${p.porciones}</div>` : ''}
+          ${p.etiqueta ? `<div class="prod-tag">${p.etiqueta}</div>` : ''}
+          <div class="prod-body">
+            <div class="prod-nm">${p.nombre}</div>
+            <div class="prod-desc">${p.descripcion||''}</div>
+            <div class="prod-foot">
+              <div class="prod-price">${money(p.precio)}</div>
+              <div data-slot="${p.id}"></div>
+            </div>
+          </div>
+        </div>`).join('')}
+    </div>`).join('');
+  MENU.forEach(p => {
+    const slot = main.querySelector(`[data-slot="${p.id}"]`);
+    if(!slot) return;
+    renderSlot(slot, p);
+  });
+}
+function renderSlot(slot, p){
+  const cant = carrito[p.id]?.cantidad || 0;
+  if(cant===0){
+    slot.innerHTML = `<button class="btn-agregar">+ Agregar</button>`;
+    slot.querySelector('button').onclick = () => cambiarCantidad(p, 1);
+  } else {
+    slot.innerHTML = `<div class="qty-ctl"><button class="minus" data-d>−</button><span>${cant}</span><button class="plus" data-a>+</button></div>`;
+    slot.querySelector('[data-d]').onclick = () => cambiarCantidad(p, -1);
+    slot.querySelector('[data-a]').onclick = () => cambiarCantidad(p, 1);
+  }
+}
+window.cambiarCantidad = function(p, delta){
+  const actual = carrito[p.id]?.cantidad || 0;
+  const nueva = Math.max(0, actual+delta);
+  if(nueva===0) delete carrito[p.id];
+  else carrito[p.id] = { producto:p, cantidad:nueva };
+  renderMenu();
+  renderCartFab();
+}
+function totalCarrito(){
+  return Object.values(carrito).reduce((a,i)=>a+i.cantidad*i.producto.precio,0);
+}
+function cantidadCarrito(){
+  return Object.values(carrito).reduce((a,i)=>a+i.cantidad,0);
+}
+function renderCartFab(){
+  const fab = document.getElementById('cart-fab');
+  const n = cantidadCarrito();
+  fab.classList.toggle('show', n>0);
+  document.getElementById('cf-badge').textContent = n;
+  document.getElementById('cf-total').textContent = money(totalCarrito());
+}
+window.abrirCarrito = function(){
+  const list = document.getElementById('cart-list');
+  const items = Object.values(carrito);
+  list.innerHTML = items.map(i => `
+    <div class="cart-row">
+      <div><div class="cr-nm">${i.producto.nombre}</div><div class="cr-pr">${i.cantidad} × ${money(i.producto.precio)}</div></div>
+      <div class="qty-ctl"><button class="minus" data-d="${i.producto.id}">−</button><span>${i.cantidad}</span><button class="plus" data-a="${i.producto.id}">+</button></div>
+    </div>`).join('') || '<div class="empty-menu">Tu carrito está vacío.</div>';
+  list.querySelectorAll('[data-d]').forEach(b => b.onclick = () => { cambiarCantidad(carrito[b.dataset.d].producto, -1); window.abrirCarrito(); });
+  list.querySelectorAll('[data-a]').forEach(b => b.onclick = () => { cambiarCantidad(carrito[b.dataset.a].producto, 1); window.abrirCarrito(); });
+  document.getElementById('cart-total-txt').textContent = money(totalCarrito());
+  document.getElementById('overlay-carrito').classList.add('on');
+}
+window.cerrarOverlay = function(id){ document.getElementById(id).classList.remove('on'); }
+window.irACheckout = function(){
+  if(cantidadCarrito()===0) return;
+  cerrarOverlay('overlay-carrito');
+  document.getElementById('overlay-checkout').classList.add('on');
+}
+window.elegirCanal = function(canal){
+  canalElegido = canal;
+  document.getElementById('canal-domicilio').classList.toggle('on', canal==='domicilio');
+  document.getElementById('canal-recoge').classList.toggle('on', canal==='recoge');
+  document.getElementById('canal-sitio').classList.toggle('on', canal==='sitio');
+  document.getElementById('ck-direccion-wrap').classList.toggle('hide', canal!=='domicilio');
+  document.getElementById('ck-zona-wrap').classList.toggle('hide', canal!=='domicilio');
+  document.getElementById('ck-telefono-wrap').classList.toggle('hide', canal==='sitio');
+  document.getElementById('ck-mesa-wrap').classList.toggle('hide', canal!=='sitio');
+  if(canal==='sitio') renderMesaSelect();
+  if(canal==='domicilio') renderZonaSelect();
+}
+window.confirmarPedido = async function(){
+  const nombre = document.getElementById('ck-nombre').value.trim();
+  const telefono = document.getElementById('ck-telefono').value.trim();
+  const direccion = document.getElementById('ck-direccion').value.trim();
+  const metodo = document.getElementById('ck-metodo').value;
+  const msg = document.getElementById('ck-msg');
+  if(!canalElegido){ msg.textContent = 'Elige domicilio, para llevar o comer aquí.'; return; }
+  let mesaSel = null;
+  if(canalElegido==='sitio'){
+    const mesaId = document.getElementById('ck-mesa').value;
+    if(!mesaId){ msg.textContent = 'No hay mesas disponibles en este momento.'; return; }
+    mesaSel = MESAS.find(m => m.id === mesaId);
+  } else {
+    if(!nombre || !telefono){ msg.textContent = 'Completa tu nombre y teléfono.'; return; }
+    if(canalElegido==='domicilio' && !direccion){ msg.textContent = 'Ingresa la dirección de entrega.'; return; }
+    if(canalElegido==='domicilio' && !document.getElementById('ck-zona').value){ msg.textContent = 'Elige tu zona.'; return; }
+  }
+  const zona = canalElegido==='domicilio' ? document.getElementById('ck-zona').value : null;
+  const items = Object.values(carrito);
+  if(items.length===0){ msg.textContent = 'Tu carrito está vacío.'; return; }
+  const total = totalCarrito();
+  const pedidoItems = items.map(i => ({
+    producto_id: i.producto.id, nombre: i.producto.nombre, cantidad: i.cantidad,
+    precio: i.producto.precio, estacion: i.producto.estacion || 'Cocina',
+    categoria: i.producto.categoria || 'Sin categoría',
+    receta: i.producto.receta || [], estado: 'pendiente'
+  }));
+  try{
+    await addDoc(negDoc('pedidos'), {
+      mesa_id: mesaSel ? mesaSel.id : null,
+      mesa_numero: mesaSel ? mesaSel.numero : (canalElegido==='domicilio' ? 'Domicilio' : 'Para llevar'),
+      capturado_por: 'cliente_menu_digital',
+      capturado_por_nombre: nombre || (mesaSel ? `Mesa ${mesaSel.numero}` : ''),
+      items: pedidoItems, estado: 'recibido', canal: canalElegido, zona: zona || null,
+      ubicacion: (canalElegido==='domicilio' && ubicacionGPS) ? ubicacionGPS : null,
+      cliente_nombre: nombre || null, cliente_telefono: telefono || null, direccion_entrega: direccion || null,
+      metodo_pago: metodo, total, origen_entrega: 'venta', estado_dian: 'pendiente',
+      timestamps: { recibido: serverTimestamp() },
+    });
+    if(mesaSel){
+      await updateDoc(negD('mesas', mesaSel.id), { estado: 'ocupada' });
+    }
+    cerrarOverlay('overlay-checkout');
+    document.getElementById('confirm-detalle').textContent = canalElegido==='sitio'
+      ? `Tu pedido va para la Mesa ${mesaSel.numero}. Un mesero te lo llevará en breve.`
+      : `Ya lo estamos preparando. Tiempo estimado: ${canalElegido==='domicilio' ? '35-45 min de entrega' : '15-20 min para recoger'}.`;
+    const modalidadTxt = canalElegido==='sitio' ? `Mesa ${mesaSel.numero}` : (canalElegido==='domicilio' ? 'Domicilio' : 'Para llevar');
+    const lineasWA = [
+      'Hola! Quiero confirmar mi pedido en *La Industria*:', '',
+      ...pedidoItems.map(i => `• ${i.cantidad}x ${i.nombre} — ${money(i.precio*i.cantidad)}`),
+      '', `Total: ${money(total)}`, `Modalidad: ${modalidadTxt}`,
+    ];
+    if(canalElegido==='domicilio' && zona) lineasWA.push(`Zona: ${zona}`);
+    if(canalElegido==='domicilio' && direccion) lineasWA.push(`Dirección: ${direccion}`);
+    if(nombre) lineasWA.push(`Nombre: ${nombre}`);
+    document.getElementById('btn-whatsapp').href = `https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(lineasWA.join('\n'))}`;
+    document.getElementById('overlay-confirmacion').classList.add('on');
+    carrito = {}; canalElegido = null; ubicacionGPS = null;
+    document.getElementById('ck-nombre').value=''; document.getElementById('ck-telefono').value=''; document.getElementById('ck-direccion').value='';
+    document.getElementById('gps-status').className = 'gps-status'; document.getElementById('gps-status').textContent = '';
+    document.getElementById('canal-domicilio').classList.remove('on');
+    document.getElementById('canal-recoge').classList.remove('on');
+    document.getElementById('canal-sitio').classList.remove('on');
+    document.getElementById('ck-direccion-wrap').classList.add('hide');
+    document.getElementById('ck-zona-wrap').classList.add('hide');
+    document.getElementById('ck-telefono-wrap').classList.remove('hide');
+    document.getElementById('ck-mesa-wrap').classList.add('hide');
+    renderMenu(); renderCartFab();
+  }catch(e){
+    msg.textContent = 'No se pudo enviar el pedido. (' + (e.code||e.message) + ')';
+  }
+}
+</script>
+</body>
+</html>
